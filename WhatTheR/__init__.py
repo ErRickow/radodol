@@ -98,7 +98,7 @@ else:
 
 #trl = Translator()
 
-aiosession = ClientSession()
+#aiosession = ClientSession()
 
 CMD_HELP = {}
 
