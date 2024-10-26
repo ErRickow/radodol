@@ -10,7 +10,7 @@ from datetime import datetime
 from aiohttp import ClientSession as aiosession
 
 from WhatTheR.modules import ALL_MODULES
-from WhatTheR import BOTLOG, LOGGER, app, bots, ids, dB, client
+from WhatTheR import BOTLOG, LOGGER, app, bots, ids, dB, Client
 from config import log_userbot
 from WhatTheR.fsup import join
 
