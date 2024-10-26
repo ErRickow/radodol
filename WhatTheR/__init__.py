@@ -250,3 +250,4 @@ for bot in bots:
         setattr(bot, "group_call", GroupCallFactory(bot).get_group_call())
 
 from WhatTheR.alat.client import *
+from WhatTheR.alat.database import dB
