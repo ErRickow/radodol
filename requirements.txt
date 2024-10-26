@@ -6,3 +6,4 @@ uvloop
 ErPyrogram
 python-dotenv
 pillow
+croniter
