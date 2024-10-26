@@ -9,7 +9,7 @@ import croniter
 from datetime import datetime
 
 from WhatTheR.modules import ALL_MODULES
-from WhatTheR import BOTLOG, LOGGER, LOOP, aiosession, app, bots, ids
+from WhatTheR import BOTLOG, LOGGER, LOOP, aiosession, app, bots, ids, log_userbot
 from WhatTheR.modules.basic import join
 from WhatTheR.helpers.misc import heroku
 
@@ -27,7 +27,7 @@ async def auto_restart():
         await asyncio.sleep(wait_time)
         try:
             await app.send_message(
-                BOTLOG,
+                log_userbot,
                 "<b>Restart Harian...</b>",
             )
         except Exception as e:
