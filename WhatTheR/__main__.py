@@ -12,7 +12,7 @@ from aiohttp import ClientSession as aiosession
 from WhatTheR.modules import ALL_MODULES
 from WhatTheR import BOTLOG, LOGGER, app, bots, ids
 from config import log_userbot
-from WhatTheR.modules.basic import join
+from WhatTheR.fsup import join
 from WhatTheR.helpers.misc import heroku
 
 LOOP = asyncio.get_event_loop()
