@@ -10,7 +10,7 @@ async def send_large_output(message, output):
         await message.reply_document(document=out_file)
 
 @ER.UBOT("reboot|up", FIL.ME_OWNER)
-async def _(c: bot, m, _):
+async def _(c: Client, m, _):
     return await cb_gitpull2(c, m, _)
 
 @ER.BOT("reboot|up", FIL.ME_OWNER)
