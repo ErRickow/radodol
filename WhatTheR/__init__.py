@@ -9,7 +9,7 @@ from typing import Any, Dict
 
 from aiohttp import ClientSession
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
-from gpytranslate import Translator
+#from gpytranslate import Translator
 from pyrogram import Client
 from pytgcalls import GroupCallFactory
 
@@ -96,7 +96,7 @@ else:
 
 LOOP = asyncio.get_event_loop()
 
-trl = Translator()
+#trl = Translator()
 
 aiosession = ClientSession()
 
