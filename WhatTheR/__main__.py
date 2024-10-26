@@ -13,7 +13,7 @@ from WhatTheR.modules import ALL_MODULES
 from WhatTheR import BOTLOG, LOGGER, app, bots, ids
 from config import log_userbot
 from WhatTheR.fsup import join
-from WhatTheR.helpers.misc import heroku
+#from WhatTheR.helpers.misc import heroku
 
 LOOP = asyncio.get_event_loop()
 
@@ -71,5 +71,5 @@ async def main():
 if __name__ == "__main__":
     LOGGER("WhatTheR").info("WhatTheR Bot Telah Hidup")
     install()
-    heroku()
+#    heroku()
     LOOP.run_until_complete(main())
