@@ -9,13 +9,11 @@ async def send_large_output(message, output):
         out_file.name = "update.txt"
         await message.reply_document(document=out_file)
 
-@ER.UBOT("reboot|up")
-@ER.thecegers
+@ER.UBOT("reboot|up", FIL.ME_OWNER)
 async def _(c: flyer, m, _):
     return await cb_gitpull2(c, m, _)
 
-@ER.BOT("reboot|up")
-@ER.thecegers
+@ER.BOT("reboot|up", FIL.ME_OWNER)
 async def _(c: bot, m, _):
     return await cb_gitpull2(c, m, _)
 
