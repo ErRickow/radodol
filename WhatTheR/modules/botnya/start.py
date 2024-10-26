@@ -37,7 +37,7 @@ async def clone(bot: app, msg: Message):
         await asyncio.sleep(5)
         # Ganti direktori ini sesuai dengan repo Anda
         client = Client(
-            name="Melody",
+            name="WhatHahh",
             api_id=API_ID,
             api_hash=API_HASH,
             session_string=phone,
