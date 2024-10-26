@@ -1,6 +1,7 @@
 from pyrogram import filters, Client
 
 from WhatTheR import *
+from config import OWNER_ID, USER_ID
 
 
 class FIL:
