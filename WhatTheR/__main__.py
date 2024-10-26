@@ -31,7 +31,7 @@ async def load_userbots():
                 session_string=userbot_data["session_string"],
                 plugins=dict(root="WhatTheR/modules")
             )
-            await client.start()
+            #await client.start()
             bots.append(client)
             print(f"Userbot {userbot_data['name']} started successfully.")
         except Exception as e:
