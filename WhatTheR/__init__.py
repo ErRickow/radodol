@@ -11,7 +11,7 @@ from aiohttp import ClientSession
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 #from gpytranslate import Translator
 from pyrogram import *
-from pyrogram.type import *
+from pyrogram.types import *
 from pytgcalls import GroupCallFactory
 
 
