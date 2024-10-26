@@ -7,10 +7,6 @@ dnspython
 emoji
 openai
 gitpython
-google-search==1.1.1
-google==3.0.0
-googlesearch-python== 1.0.1
-gpytranslate
 gtts
 heroku3
 humanize
@@ -36,5 +32,4 @@ opencv-python-headless
 urllib3
 uvloop
 wget==3.2
-youtube-search-python
-yt-dlp
+croniter
