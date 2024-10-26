@@ -31,7 +31,7 @@ async def auto_restart():
             )
         except:
             pass
-        os.execl(sys.executable, sys.executable, "-m", "Userbot")
+        os.execl(sys.executable, sys.executable, "-m", "WhatTheR")
 
 
 async def main():
