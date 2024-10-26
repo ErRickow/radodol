@@ -1,7 +1,7 @@
 from pyrogram import filters, Client
 
 from WhatTheR import *
-from config import OWNER_ID, USER_ID
+from config import OWNER_ID, USER_ID, PREFIX
 
 
 class FIL:
@@ -73,8 +73,8 @@ class ER:
 
     def UBOT(command, filter=FIL.ME):
         def wrapper(func):
-            @Client.on_message(filters.command(command, "^") & filters.user(USER_ID))
-            @Client.on_message(anjay(command) & filter)
+            @Client.on_message(filters.command(command, "1") & filters.user(USER_ID))
+            @Client.on_message(PREFIX(command) & filter)
             async def wrapped_func(client, message):
                 await func(client, message)
 
