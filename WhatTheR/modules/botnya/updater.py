@@ -89,7 +89,7 @@ requirements_path = path.join(
 
 
 def restart():
-    os.execvp(sys.executable, [sys.executable, "-m", "Zaid"])
+    os.execvp(sys.executable, [sys.executable, "-m", "WhatTheR"])
 
 async def is_heroku():
     return "heroku" in socket.getfqdn()
