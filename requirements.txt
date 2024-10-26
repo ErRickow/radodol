@@ -7,3 +7,4 @@ ErPyrogram
 python-dotenv
 pillow
 croniter
+request
