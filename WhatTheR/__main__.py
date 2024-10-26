@@ -2,6 +2,10 @@ import importlib
 from pyrogram import idle
 from uvloop import install
 import asyncio
+import os
+import sys
+from pytz import timezone
+import croniter
 from datetime import datetime
 
 from WhatTheR.modules import ALL_MODULES
@@ -11,9 +15,7 @@ from WhatTheR.helpers.misc import heroku
 
 BOT_VER = "3.R.0.R"
 PREFIX = [""]
-MSG_ON = """<blockquote>{mention} **AKTIF**
-<blockquote>
-"""
+MSG_ON = """<blockquote>Bot aktif sebagai: **{bot_name}** versi {bot_ver}</blockquote>"""
 
 async def auto_restart():
     tz = timezone("Asia/Jakarta")
@@ -21,45 +23,49 @@ async def auto_restart():
     while True:
         now = datetime.now(tz)
         next_run = cron.get_next(datetime)
-
         wait_time = (next_run - now).total_seconds()
         await asyncio.sleep(wait_time)
         try:
             await app.send_message(
-                log_userbot,
-                "<blockquote><b>Restart Daily...</b></blockquote>",
+                BOTLOG,
+                "<b>Restart Harian...</b>",
             )
-        except:
-            pass
+        except Exception as e:
+            LOGGER("WhatTheR").error(f"Error saat mengirim pesan restart: {e}")
         os.execl(sys.executable, sys.executable, "-m", "WhatTheR")
-
 
 async def main():
     await app.start()
     print("LOG: Founded Bot token Booting..")
     for all_module in ALL_MODULES:
-        importlib.import_module("WhatTheR.modules" + all_module)
-        print(f"Successfully Imported {all_module} ")
+        importlib.import_module("WhatTheR.modules." + all_module)
+        print(f"Successfully Imported {all_module}")
     for bot in bots:
         try:
             await bot.start()
+            await asyncio.sleep(2)
             ex = await bot.get_me()
             await join(bot)
+            await asyncio.sleep(1)
             try:
-                await bot.send_message(BOTLOG, MSG_ON.format(BOT_VER, CMD_HANDLER))
-            except BaseException:
-                pass
-            print(f"Started as {ex.first_name} | {ex.id} ")
+                await bot.send_message(
+                    BOTLOG, MSG_ON.format(bot_name=ex.first_name, bot_ver=BOT_VER)
+                )
+            except Exception as e:
+                LOGGER("WhatTheR").warning(f"Failed to send MSG_ON message: {e}")
+            print(f"Started as {ex.first_name} | {ex.id}")
             ids.append(ex.id)
         except Exception as e:
-            print(f"{e}")
+            LOGGER("WhatTheR").error(f"Error saat memulai bot: {e}")
+    
+    asyncio.create_task(auto_restart())
+
     await asyncio.sleep(100)
     await idle()
     await aiosession.close()
 
-
 if __name__ == "__main__":
-    LOGGER("WhatTheR").info("WhatTheR Telah Hidup")
+    LOGGER("WhatTheR").info("WhatTheR Bot Telah Hidup")
     install()
     heroku()
     LOOP.run_until_complete(main())
