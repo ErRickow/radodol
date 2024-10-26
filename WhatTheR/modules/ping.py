@@ -39,7 +39,7 @@ async def pingme(client: Client, message: Message):
     loading_message = await message.reply_text("**Loading WhatTheR... 0% ▒▒▒▒▒▒▒▒▒▒**")
     
     try:
-        await message.delete()
+ #       await message.delete()
     except Exception:
         pass
     
