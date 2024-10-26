@@ -10,16 +10,32 @@ from datetime import datetime
 from aiohttp import ClientSession as aiosession
 
 from WhatTheR.modules import ALL_MODULES
-from WhatTheR import BOTLOG, LOGGER, app, bots, ids
+from WhatTheR import BOTLOG, LOGGER, app, bots, ids, dB  # Pastikan dB terhubung ke database
 from config import log_userbot
 from WhatTheR.fsup import join
-#from WhatTheR.helpers.misc import heroku
 
 LOOP = asyncio.get_event_loop()
 
 BOT_VER = "3.R.0.R"
 PREFIX = [""]
 MSG_ON = """<blockquote>Bot aktif sebagai: **{bot_name}** versi {bot_ver}</blockquote>"""
+
+async def load_userbots():
+    userbots = dB.get_userbots()  # Mendapatkan semua klien dari database
+    for userbot_data in userbots:
+        try:
+            client = Client(
+                name=userbot_data["name"],
+                api_id=userbot_data["api_id"],
+                api_hash=userbot_data["api_hash"],
+                session_string=userbot_data["session_string"],
+                plugins=dict(root="WhatTheR/modules")
+            )
+            await client.start()
+            bots.append(client)
+            print(f"Userbot {userbot_data['name']} started successfully.")
+        except Exception as e:
+            LOGGER("WhatTheR").error(f"Error saat memulai userbot {userbot_data['name']}: {e}")
 
 async def auto_restart():
     tz = timezone("Asia/Jakarta")
@@ -44,6 +60,9 @@ async def main():
     for all_module in ALL_MODULES:
         importlib.import_module("WhatTheR.modules" + all_module)
         print(f"Successfully Imported {all_module}")
+    
+    await load_userbots()  # Memuat dan memulai userbot dari database
+    
     for bot in bots:
         try:
             await bot.start()
@@ -52,7 +71,7 @@ async def main():
             await join(bot)
             await asyncio.sleep(1)
             try:
-                await bot.send_message(
+                await app.send_message(
                     BOTLOG, MSG_ON.format(bot_name=ex.first_name, bot_ver=BOT_VER)
                 )
             except Exception as e:
@@ -64,12 +83,10 @@ async def main():
     
     asyncio.create_task(auto_restart())
 
-    await asyncio.sleep(100)
     await idle()
     await aiosession.close()
 
 if __name__ == "__main__":
     LOGGER("WhatTheR").info("WhatTheR Bot Telah Hidup")
     install()
-#    heroku()
     LOOP.run_until_complete(main())
