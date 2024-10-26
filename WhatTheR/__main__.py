@@ -10,7 +10,7 @@ from datetime import datetime
 from aiohttp import ClientSession as aiosession
 
 from WhatTheR.modules import ALL_MODULES
-from WhatTheR import BOTLOG, LOGGER, app, bots, ids, dB  # Pastikan dB terhubung ke database
+from WhatTheR import BOTLOG, LOGGER, app, bots, ids, dB 
 from config import log_userbot
 from WhatTheR.fsup import join
 
