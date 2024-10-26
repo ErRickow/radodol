@@ -19,7 +19,7 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHANNEL = getenv("CHANNEL", "Pamerdong")
 PREFIX = getenv("PREFIX", ".")
 DB_URL = getenv("DATABASE_URL", "sqlite://Er.db")
-ALIVE_PIC = getenv("ALIVE_PIC", 'https://telegra.ph/file/3c52a01057865f7511168.jpg')
+ALIVE_PIC = getenv("ALIVE_PIC", 'https://itzpire.com/file/24967ad46089.jpg')
 GIT_TOKEN = getenv(
     "GIT_TOKEN",
     jandigantinantierornanges("").decode(
