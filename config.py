@@ -13,6 +13,7 @@ API_ID = os.getenv("API_ID")
 API_HASH = os.getenv("API_HASH")
 
 BOTLOG = int(getenv("BOTLOG") or 0)
+log_userbot = int(getenv("log_userbot") or 0)
 BOT_VER = "1.1.5@main"
 BRANCH = getenv("BRANCH", "main") #don'
 prefix = cmd
