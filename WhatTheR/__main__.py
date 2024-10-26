@@ -31,11 +31,15 @@ async def load_userbots():
                 session_string=userbot_data["session_string"],
                 plugins=dict(root="WhatTheR/modules")
             )
-            #await client.start()
             bots.append(client)
             print(f"Userbot {userbot_data['name']} started successfully.")
         except Exception as e:
-            LOGGER("WhatTheR").error(f"Error saat memulai userbot {userbot_data['name']}: {e}")
+            # Jika sesi direvoke, hapus dari database
+            if "session" in str(e).lower():
+                dB.remove_ubot(userbot_data["user_id"])  # Ganti remove_userbot dengan remove_ubot
+                LOGGER("WhatTheR").error(f"Sesi direvoke untuk userbot {userbot_data['name']}, dihapus dari database.")
+            else:
+                LOGGER("WhatTheR").error(f"Error saat memulai userbot {userbot_data['name']}: {e}")
 
 async def auto_restart():
     tz = timezone("Asia/Jakarta")
@@ -58,12 +62,14 @@ async def main():
     await app.start()
     print("LOG: Founded Bot token Booting..")
     await asyncio.sleep(1)
+    
     for all_module in ALL_MODULES:
         importlib.import_module("WhatTheR.modules" + all_module)
         print(f"Successfully Imported {all_module}")
     
-    await load_userbots()  # Memuat dan memulai userbot dari database
-    
+    await load_userbots()
+
+    started_bots = []
     for bot in bots:
         try:
             await bot.start()
@@ -71,17 +77,26 @@ async def main():
             ex = await bot.get_me()
             await join(bot)
             await asyncio.sleep(1)
-            try:
-                await app.send_message(
-                    BOTLOG, MSG_ON.format(bot_name=ex.first_name, bot_ver=BOT_VER)
-                )
-            except Exception as e:
-                LOGGER("WhatTheR").warning(f"Failed to send MSG_ON message: {e}")
+            started_bots.append(f"{ex.first_name} | {ex.id}")
             print(f"Started as {ex.first_name} | {ex.id}")
             ids.append(ex.id)
         except Exception as e:
-            LOGGER("WhatTheR").error(f"Error saat memulai bot: {e}")
-    
+            # Jika sesi direvoke saat memulai bot
+            if "session" in str(e).lower():
+                dB.remove_ubot(bot.user_id)  # Hapus bot dari database jika sesi direvoke
+                LOGGER("WhatTheR").error(f"Sesi direvoke untuk bot {bot.name}, dihapus dari database.")
+            else:
+                LOGGER("WhatTheR").error(f"Error saat memulai bot: {e}")
+
+    # Kirim pesan ke BOTLOG dengan semua bot yang berhasil dimulai
+    if started_bots:
+        try:
+            await app.send_message(
+                BOTLOG, f"Userbot berhasil dimulai:\n" + "\n".join(started_bots)
+            )
+        except Exception as e:
+            LOGGER("WhatTheR").warning(f"Failed to send userbot startup message: {e}")
+
     asyncio.create_task(auto_restart())
 
     await idle()
