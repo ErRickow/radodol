@@ -46,6 +46,6 @@ async def clone(bot: app, msg: Message):
         await client.start()
         user = await client.get_me()
         await msg.reply(f"Your Client Has Been Successfully Started as {user.first_name} ✅.")
-        await app.sens_message(log_userbot, "New Client started")
+        await app.send_message(log_userbot, "New Client started")
     except Exception as e:
         await msg.reply(f"**ERROR:** `{str(e)}`\nPress /start to try again.")
