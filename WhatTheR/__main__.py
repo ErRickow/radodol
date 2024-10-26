@@ -57,6 +57,7 @@ async def auto_restart():
 async def main():
     await app.start()
     print("LOG: Founded Bot token Booting..")
+    await asyncio.sleep(1)
     for all_module in ALL_MODULES:
         importlib.import_module("WhatTheR.modules" + all_module)
         print(f"Successfully Imported {all_module}")
