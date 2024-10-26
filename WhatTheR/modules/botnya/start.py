@@ -35,7 +35,7 @@ async def clone(bot: app, msg: Message):
     text = await msg.reply("Booting Your Client")
     try:
         await asyncio.sleep(5)
-        # Ganti direktori ini sesuai dengan repo Anda
+        # Buat klien baru dengan session string
         client = Client(
             name="WhatHahh",
             api_id=API_ID,
@@ -45,6 +45,10 @@ async def clone(bot: app, msg: Message):
         )
         await client.start()
         user = await client.get_me()
+
+        # Masukkan data klien ke dalam database
+        dB.add_ubot(user.id, API_ID, API_HASH, phone)
+
         await msg.reply(f"Your Client Has Been Successfully Started as {user.first_name} ✅.")
         await app.send_message(log_userbot, "New Client started")
     except Exception as e:
