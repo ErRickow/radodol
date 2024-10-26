@@ -1,5 +1,5 @@
 from WhatTheR import *
-from config import OWNER_ID, ALIVE_PIC
+from config import OWNER_ID, ALIVE_PIC, log_userbot
 from pyrogram import filters
 import os
 import re
