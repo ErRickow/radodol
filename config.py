@@ -4,8 +4,6 @@ import os
 from os import getenv
 from dotenv import load_dotenv
 
-from Ah.bantuan.cmd import cmd
-
 load_dotenv(".env")
 
 API_ID = os.getenv("API_ID")
@@ -16,11 +14,10 @@ BOTLOG = int(getenv("BOTLOG") or 0)
 log_userbot = int(getenv("log_userbot") or 0)
 BOT_VER = "1.1.5@main"
 BRANCH = getenv("BRANCH", "main") #don'
-prefix = cmd
 OWNER_ID = getenv("OWNER_ID", "6607703424")
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 CHANNEL = getenv("CHANNEL", "Pamerdong")
-PREFIX = getenv("PREFIX", "")
+PREFIX = getenv("PREFIX", ".")
 DB_URL = getenv("DATABASE_URL", "sqlite://Er.db")
 GIT_TOKEN = getenv(
     "GIT_TOKEN",
