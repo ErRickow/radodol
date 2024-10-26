@@ -25,7 +25,7 @@ async def auto_restart():
         wait_time = (next_run - now).total_seconds()
         await asyncio.sleep(wait_time)
         try:
-            await bot.send_message(
+            await app.send_message(
                 log_userbot,
                 "<blockquote><b>Restart Daily...</b></blockquote>",
             )
