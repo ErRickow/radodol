@@ -38,10 +38,10 @@ async def pingme(client: Client, message: Message):
     # Menggunakan "WhatTheR" untuk loading
     loading_message = await message.reply_text("**Loading WhatTheR... 0% ▒▒▒▒▒▒▒▒▒▒**")
     
-    try:
+#    try:
  #       await message.delete()
-    except Exception:
-        pass
+ #   except Exception:
+#        pass
     
     # Mengupdate loading progress
     for progress in [20, 40, 60, 80, 100]:
