@@ -94,7 +94,7 @@ if BOTLOG:
 else:
    BOTLOG = "me"
 
-LOOP = asyncio.get_event_loop()
+#LOOP = asyncio.get_event_loop()
 
 #trl = Translator()
 
