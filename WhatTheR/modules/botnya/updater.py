@@ -1,7 +1,7 @@
 import os
 import sys
 import subprocess
-import BytesIO
+import io
 from WhatTheR import *
 
 async def send_large_output(message, output):
