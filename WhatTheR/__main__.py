@@ -2,7 +2,7 @@ import importlib
 from pyrogram import idle
 from uvloop import install
 import asyncio
-
+from datetime import datetime
 
 from WhatTheR.modules import ALL_MODULES
 from WhatTheR import BOTLOG, LOGGER, LOOP, aiosession, app, bots, ids
@@ -14,6 +14,24 @@ PREFIX = [""]
 MSG_ON = """<blockquote>{mention} **AKTIF**
 <blockquote>
 """
+
+async def auto_restart():
+    tz = timezone("Asia/Jakarta")
+    cron = croniter.croniter("00 00 * * *", datetime.now(tz))
+    while True:
+        now = datetime.now(tz)
+        next_run = cron.get_next(datetime)
+
+        wait_time = (next_run - now).total_seconds()
+        await asyncio.sleep(wait_time)
+        try:
+            await bot.send_message(
+                log_userbot,
+                "<blockquote><b>Restart Daily...</b></blockquote>",
+            )
+        except:
+            pass
+        os.execl(sys.executable, sys.executable, "-m", "Userbot")
 
 
 async def main():
