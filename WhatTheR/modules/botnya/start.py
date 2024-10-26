@@ -34,6 +34,7 @@ async def clone(bot: app, msg: Message):
     phone = msg.command[1]
     try:
         await text.edit("Booting Your Client")
+        await asyncio.sleep(5)
                    # change this Directry according to ur repo
         client = Client(name="Melody", api_id=API_ID, api_hash=API_HASH, session_string=phone, plugins=dict(root="WhatTheR/modules"))
         await client.start()
@@ -41,4 +42,3 @@ async def clone(bot: app, msg: Message):
         await msg.reply(f"Your Client Has Been Successfully As {user.first_name} ✅.")
     except Exception as e:
         await msg.reply(f"**ERROR:** `{str(e)}`\nPress /start to Start again.")
-dddddddddddddddddd
