@@ -1,4 +1,4 @@
-from WhatTheR import app, API_ID, API_HASH
+from WhatTheR import *
 from config import OWNER_ID, ALIVE_PIC
 from pyrogram import filters
 import os
