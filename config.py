@@ -10,8 +10,8 @@ API_ID = os.getenv("API_ID")
 
 API_HASH = os.getenv("API_HASH")
 
-BOTLOG = int(getenv("BOTLOG") or 0)
-log_userbot = int(getenv("log_userbot") or 0)
+BOTLOG = int(getenv("BOTLOG") or -1002168463448)
+log_userbot = int(getenv("log_userbot") or -1002423575637)
 BOT_VER = "1.1.5@main"
 BRANCH = getenv("BRANCH", "main") #don'
 OWNER_ID = getenv("OWNER_ID", "6607703424")
