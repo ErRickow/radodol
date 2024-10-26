@@ -7,11 +7,14 @@ import sys
 from pytz import timezone
 import croniter
 from datetime import datetime
+from aiohttp import ClientSession as aiosession
 
 from WhatTheR.modules import ALL_MODULES
-from WhatTheR import BOTLOG, LOGGER, LOOP, aiosession, app, bots, ids, log_userbot
+from WhatTheR import BOTLOG, LOGGER, app, bots, ids, log_userbot
 from WhatTheR.modules.basic import join
 from WhatTheR.helpers.misc import heroku
+
+LOOP = asyncio.get_event_loop()
 
 BOT_VER = "3.R.0.R"
 PREFIX = [""]
