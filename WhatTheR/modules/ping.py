@@ -28,7 +28,9 @@ async def get_readable_time(seconds: int) -> str:
 
 @ER.UBOT("ping")
 async def _(c, m):
-    await m.reply("pong")
+    anu = await m.reply("pong")
+    await asyncio.sleep(1)
+    await anu.edit("ah")
 
 @ER.UBOT("kping")
 async def pingme(client: Client, message: Message):
