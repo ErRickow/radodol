@@ -132,7 +132,7 @@ async def updateme_requirements():
 
 @Client.on_message(filters.command("update", ".") & filters.me)
 async def upstream(client: Client, message: Message):
-    status = await message.edit_text("`Checking for Updates, Wait a Moment...`")
+    status = await message.reply("`Checking for Updates, Wait a Moment...`")
     conf = get_arg(message)
     off_repo = UPSTREAM_REPO_URL
     try:
